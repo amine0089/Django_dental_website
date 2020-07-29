@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+	  <!-- ***** Breadcrumb Area Start ***** -->
+  <div class="breadcumb-area bg-img bg-gradient-overlay" style="background-image: url({% static 'img/bg-img/12.jpg' %});">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12">
+          <h2 class="title">Service</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="breadcumb--con">
+	    <div class="container">
+	      <div class="row">
+	        <div class="col-12">
+	          <nav aria-label="breadcrumb">
+	            <ol class="breadcrumb">
+	              <li class="breadcrumb-item"><a href=""><i class="fa fa-home"></i> Home</a></li>
+	              <li class="breadcrumb-item active" aria-current="page">Service</li>
+	            </ol>
+	          </nav>
+	        </div>
+	      </div>
+	    </div>
+  </div>
+  <!-- ***** Breadcrumb Area End ***** -->
+
+  <!-- ***** Services Area Start ***** -->
+  <section class="dento-services-area mt-50 mb-50">
+		    <div class="container">
+		      <div class="row">
+
+		        {% for service in services  %}
+			        <div class="col-12 col-sm-6 col-lg-4">
+			          <div class="single-service--area text-center mb-50">
+			            <div class="icon--">
+			              <img src="{{service.image.url}}" alt="">
+			            </div>
+			            <h5>{{service.title}}</h5>
+			            <p>{{service.text}}.</p>
+			          </div>
+			        </div>      	
+		        {% endfor %}
+		      </div>
+		    </div>
+  </section>
+
+  <section class="dento-blog-area section-padding-100-0 clearfix">
+    <div class="container">
+      <div class="row">
+        <!-- Section Heading -->
+        <div class="col-12">
+          <div class="section-heading text-center">
+            <h2>The Latest News</h2>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Single Blog Item -->
+                   {% for post in post_list %}
+
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="single-blog-item mb-100">
+                    <a href="{% url 'blog:post_detail' post.id %}">
+                      <img src="{{post.image.url}}" alt="">
+                    </a>
+                    <!-- Blog Content -->
+                    <div class="blog-content">
+                      <a href="{% url 'blog:post_detail' post.id %}" class="post-title">{{post.title}}</a>
+                      <p>{{post.description|truncatewords:20}}</p>
+                      <div class="post-meta">
+                        <a href="{% url 'blog:post_detail' post.id %}"><i class="icon_clock_alt"></i>{{post.created|date:'j M o'}}</a>
+                        <a href="{% url 'blog:post_detail' post.id %}"><i class="icon_chat_alt"></i> 3 Comments</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            {% endfor %}
+      </div>
+    </div>
+  </section>
+  <!-- ***** Blog Area End ***** -->
+{% endblock body %}
